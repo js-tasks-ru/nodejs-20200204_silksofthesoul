@@ -12,10 +12,10 @@ const r200 = (res, fileStream) => {
   fileStream
       .on('error', (err) => r500(res) )
       .on('open', () => {
-        console.log('open');
+        // console.log('open');
       })
       .on('close', () => {
-        console.log('close');
+        // console.log('close');
       })
       .on('close', () => {
         fileStream.destroy();
@@ -45,7 +45,7 @@ const r501 = (res) => {
 server.on('request', async (req, res) => {
   const pathname = url.parse(req.url).pathname.slice(1);
   const pathArray = pathname.split(/[\/\\]/igm);
-  console.log(pathArray, '<<');
+  // console.log(pathArray, '<<');
   if (pathArray.length > 1) return r400(res);
 
   const filepath = path.join(__dirname, 'files', pathname);
