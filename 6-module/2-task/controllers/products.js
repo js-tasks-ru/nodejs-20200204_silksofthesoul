@@ -1,15 +1,15 @@
 const url = require('url');
-// const Product = require('../models/product.js');
+const Product = require('../models/product.js');
 const {removeProperty} = require('../libs/object');
 // const {getCollection, getModel} = require('../libs/mockup');
 
-module.exports.productsBySubcategory = async function productsBySubcategory(ctx, next, Model) {
+module.exports.productsBySubcategory = async function productsBySubcategory(ctx, next) {
   const u = ctx.request.url;
   const params = url.parse(u);
   if (!params.query) return next();
   const query = params.query.split('=');
   if (query[0] === 'subcategory') {
-    // const Model = Product;
+    const Model = Product;
     let products = await Model.find({'subcategory': query[1]}, {
       '__v': 0,
     });
@@ -22,8 +22,8 @@ module.exports.productsBySubcategory = async function productsBySubcategory(ctx,
   }
 };
 
-module.exports.productList = async function productList(ctx, next, Model) {
-  // const Model = Product;
+module.exports.productList = async function productList(ctx, next) {
+  const Model = Product;
   let products = await Model.find({}, {
     '__v': 0,
   });
@@ -34,10 +34,10 @@ module.exports.productList = async function productList(ctx, next, Model) {
   ctx.response.body = {products};
 };
 
-module.exports.productById = async function productById(ctx, next, Model) {
+module.exports.productById = async function productById(ctx, next) {
   const {params} = ctx;
   if (params.id) {
-    // const Model = Product;
+    const Model = Product;
     let product = null;
     try {
       product = await Model.findOne({'_id': params.id}, {
@@ -57,7 +57,6 @@ module.exports.productById = async function productById(ctx, next, Model) {
       id: product.toObject()._id,
       ...removeProperty('_id')(product.toObject()),
     };
-    // console.log(product, '!!');
     ctx.response.body = {product};
   }
 };
