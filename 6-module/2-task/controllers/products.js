@@ -1,5 +1,5 @@
 const url = require('url');
-const Product = require('../models/product.js');
+const Product = require('../models/Product.js');
 const {removeProperty} = require('../libs/object');
 // const {getCollection, getModel} = require('../libs/mockup');
 
