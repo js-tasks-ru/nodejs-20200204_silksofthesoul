@@ -31,5 +31,8 @@ const productSchema = new mongoose.Schema({
   images: [String],
 
 });
-
-module.exports = connection.model('Product', productSchema);
+try {
+  module.exports = connection.model('Product', productSchema);
+} catch (e) {
+  module.exports = connection.models.Product;
+}
