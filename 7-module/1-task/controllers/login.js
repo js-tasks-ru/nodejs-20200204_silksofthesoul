@@ -2,6 +2,8 @@ const uuid = require('uuid/v4');
 const passport = require('../libs/passport');
 
 module.exports.login = async function login(ctx, next) {
+  const {email, password} = ctx.request.body;
+
   await passport.authenticate('local', async (err, user, info) => {
     if (err) throw err;
 
